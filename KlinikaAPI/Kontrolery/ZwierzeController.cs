@@ -129,4 +129,21 @@ public class ZwierzeController : ControllerBase
 
         return NoContent();
     }
+    
+    // GET api/zwierze/statystyki
+    [HttpGet("statystyki")]
+    public async Task<ActionResult<object>> GetStatystyki()
+    {
+        var liczbaZwierzat = await _context.Zwierzeta.CountAsync();
+        var sredniWiek = await _context.Zwierzeta.AverageAsync(z => z.Wiek);
+        var liczbaWizyt = await _context.Wizyty.CountAsync();
+
+        return Ok(new
+        {
+            LiczbaZwierzat = liczbaZwierzat,
+            SredniWiek = Math.Round(sredniWiek, 2),
+            LiczbaWizyt = liczbaWizyt
+        });
+    }
+
 }
