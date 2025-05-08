@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "+jg3/O8V8zgIUBEEdQCsrUo1lIsQSbgCxch4GLZ6oZY=",
+  "Source": "KlinikaAPI",
+  "BasePath": "_content/KlinikaAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

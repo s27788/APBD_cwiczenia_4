@@ -1,6 +1,7 @@
 using KlinikaAPI.Data;
 using KlinikaAPI.Modele;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KlinikaAPI.Kontrolery;
 
@@ -15,17 +16,22 @@ public class ZwierzeController : ControllerBase
         _context = context;
     }
 
+    // GET api/zwierze
     [HttpGet]
-    public ActionResult<IEnumerable<Zwierze>> GetZwierzeta()
+    public async Task<ActionResult<IEnumerable<Zwierze>>> GetZwierzeta()
     {
-        return _context.Zwierzeta.ToList();
+        return await _context.Zwierzeta
+            .Include(z => z.Wizyty) // includes visits
+            .ToListAsync();
     }
 
+    // POST api/zwierze
     [HttpPost]
-    public ActionResult<Zwierze> DodajZwierze(Zwierze nowe)
+    public async Task<ActionResult<Zwierze>> DodajZwierze(Zwierze nowe)
     {
         _context.Zwierzeta.Add(nowe);
-        _context.SaveChanges();
-        return CreatedAtAction(nameof(DodajZwierze), new { id = nowe.Id }, nowe);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetZwierzeta), new { id = nowe.Id }, nowe);
     }
 }
