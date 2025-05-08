@@ -2,107 +2,74 @@
 
 REST API, która pozwala zarządzać danymi zwierząt i ich wizyt w klinice weterynaryjnej.
 
-## 🔧 Technologia 🔧
-
-- ASP.NET Core 9
-- Entity Framework Core + SQLite
-- Swagger UI
-
 ## RUN
 
-1. Uruchom projekt
-2. Przejdź w przeglądarce na: 👉 `http://localhost:5019/swagger`
+1. Otwórz projekt w IDE i uruchom `Program.cs`
+3. Przejdź do [http://localhost:5019/swagger](http://localhost:5019/swagger)
 
-## Endpointy i przykłady
+## Endpointy
 
----
+### 🐶 🐶 🐶 Zwierzęta 🐶 🐶 🐶 
 
-### 🐶 Zwierzęta 🐶
+#### ✅ `GET /animals`
+Zwraca listę wszystkich zwierząt.
 
-#### `POST /api/Zwierze`
-
-Dodaje nowe zwierzę **razem z wizytami**.
-
-```json
-{
-  "imie": "Lok",
-  "gatunek": "Pies",
-  "wiek": 5,
-  "wizyty": [
-    {
-      "data": "2025-05-08T14:00:00",
-      "opis": "Kontrola"
-    }
-  ]
-}
-```
-
-#### `GET /api/Zwierze`
-
-Zwraca listę wszystkich zwierząt z wizytami.
-
-#### `GET /api/Zwierze/{id}`
-
+#### ✅ `GET /animals/{id}`
 Zwraca jedno zwierzę po ID.
 
-#### ✏`PUT /api/Zwierze/{id}`
+#### ✅ `POST /animals`
 
-Aktualizuje zwierzę (bez wizyt):
-
-```json
-{
-  "id": 1,
-  "imie": "NoweImie",
-  "gatunek": "Kot",
-  "wiek": 7,
-  "wizyty": []
-}
-```
-
-#### `DELETE /api/Zwierze/{id}`
-
-Usuwa zwierzę i wizyty.
-
----
-
-### 📝 Wizyty
-
-#### ➕ `POST /api/Wizyta`
-
-Dodaje wizytę do istniejącego.
+Dodaje nowe zwierzę:
 
 ```json
 {
-  "data": "2025-05-08T14:00:00",
-  "opis": "Szczepienie",
-  "zwierzeId": 1
+  "name": "Luna",
+  "category": "kot",
+  "weight": 3.8,
+  "furColor": "biały"
 }
 ```
 
-#### `GET /api/Wizyta`
+#### ✅ `PUT /animals/{id}`
 
-Zwraca listę wszystkich wizyt.
-
-#### `GET /api/Wizyta/{id}`
-
-Zwraca konkretną wizytę.
-
-#### `PUT /api/Wizyta/{id}`
-
-Aktualizuje wizytę:
+Aktualizuje dane zwierzęcia:
 
 ```json
 {
   "id": 2,
-  "data": "2025-05-10T10:00:00",
-  "opis": "Wizyta kontrolna",
-  "zwierzeId": 1
+  "name": "Mruczek",
+  "category": "kot",
+  "weight": 4.5,
+  "furColor": "czarny"
 }
 ```
 
-#### ❌ `DELETE /api/Wizyta/{id}`
-
-Usuwa wizytę.
+#### ✅ `DELETE /animals/{id}`
+Usuwa zwierzę oraz jego wizyty.
 
 ---
 
+### 🩺 Wizyty
+
+#### ✅ `GET /animals/{id}/visits`
+Zwraca listę wizyt danego zwierzęcia.
+
+#### ✅ `POST /animals/{id}/visits`
+
+Dodaje wizytę dla zwierzęcia:
+
+```json
+{
+  "date": "2025-05-10T09:00:00",
+  "description": "Szczepienie",
+  "price": 120.0
+}
+```
+
+---
+
+## dane testowe
+
+Dla testów aplikacja zawiera już kilka zwierząt i wizyt w pamięci.
+
+---
