@@ -1,11 +1,11 @@
-namespace KlinikaAPI.Modele;
+namespace KlinikaAPI.Modele.DTO;
 
-public class Zwierze
+public class ZwierzeDTO
 {
     public int Id { get; set; }
     public string Imie { get; set; } = null!;
     public string Gatunek { get; set; } = null!;
     public int Wiek { get; set; }
 
-    public List<Wizyta> Wizyty { get; set; } = new();
+    public List<WizytaDTO> Wizyty { get; set; } = new();
 }

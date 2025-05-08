@@ -1,5 +1,5 @@
 using KlinikaAPI.Data;
-using KlinikaAPI.Modele;
+using KlinikaAPI.Modele.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KlinikaAPI.Kontrolery;
@@ -16,8 +16,17 @@ public class WizytaController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Wizyta>> GetWizyty()
+    public ActionResult<IEnumerable<WizytaDTO>> GetWizyty()
     {
-        return _context.Wizyty.ToList();
+        var wizyty = _context.Wizyty
+            .Select(w => new WizytaDTO
+            {
+                Id = w.Id,
+                Data = w.Data,
+                Opis = w.Opis
+            })
+            .ToList();
+
+        return wizyty;
     }
 }

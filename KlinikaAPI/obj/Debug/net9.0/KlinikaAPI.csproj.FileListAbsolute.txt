@@ -154,3 +154,6 @@
 /Users/lidiakongiel/RiderProjects/KlinikaAPI/KlinikaAPI/obj/Debug/net9.0/KlinikaAPI.pdb
 /Users/lidiakongiel/RiderProjects/KlinikaAPI/KlinikaAPI/obj/Debug/net9.0/KlinikaAPI.genruntimeconfig.cache
 /Users/lidiakongiel/RiderProjects/KlinikaAPI/KlinikaAPI/obj/Debug/net9.0/ref/KlinikaAPI.dll
+/Users/lidiakongiel/RiderProjects/KlinikaAPI/KlinikaAPI/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/lidiakongiel/RiderProjects/KlinikaAPI/KlinikaAPI/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/lidiakongiel/RiderProjects/KlinikaAPI/KlinikaAPI/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
