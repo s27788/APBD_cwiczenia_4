@@ -41,13 +41,92 @@ public class ZwierzeController : ControllerBase
         return zwierzeta;
     }
 
+    // GET api/zwierze/{id}
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ZwierzeDTO>> GetZwierze(int id)
+    {
+        var z = await _context.Zwierzeta
+            .Include(z => z.Wizyty)
+            .FirstOrDefaultAsync(z => z.Id == id);
+
+        if (z == null) return NotFound();
+
+        var dto = new ZwierzeDTO
+        {
+            Id = z.Id,
+            Imie = z.Imie,
+            Gatunek = z.Gatunek,
+            Wiek = z.Wiek,
+            Wizyty = z.Wizyty.Select(w => new WizytaDTO
+            {
+                Id = w.Id,
+                Data = w.Data,
+                Opis = w.Opis
+            }).ToList()
+        };
+
+        return dto;
+    }
+
     // POST api/zwierze
     [HttpPost]
-    public async Task<ActionResult<Zwierze>> DodajZwierze([FromBody] Zwierze nowe)
+    public async Task<ActionResult<ZwierzeDTO>> DodajZwierze(Zwierze nowe)
     {
         _context.Zwierzeta.Add(nowe);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetZwierzeta), new { id = nowe.Id }, nowe);
+        var dto = new ZwierzeDTO
+        {
+            Id = nowe.Id,
+            Imie = nowe.Imie,
+            Gatunek = nowe.Gatunek,
+            Wiek = nowe.Wiek,
+            Wizyty = nowe.Wizyty?.Select(w => new WizytaDTO
+            {
+                Id = w.Id,
+                Data = w.Data,
+                Opis = w.Opis
+            }).ToList() ?? new()
+        };
+
+        return CreatedAtAction(nameof(GetZwierze), new { id = nowe.Id }, dto);
+    }
+
+    // PUT api/zwierze/{id}
+    [HttpPut("{id}")]
+    public async Task<IActionResult> AktualizujZwierze(int id, Zwierze zaktualizowane)
+    {
+        if (id != zaktualizowane.Id) return BadRequest();
+
+        _context.Entry(zaktualizowane).State = EntityState.Modified;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!_context.Zwierzeta.Any(z => z.Id == id)) return NotFound();
+            throw;
+        }
+
+        return NoContent();
+    }
+
+    // DELETE api/zwierze/{id}
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> UsunZwierze(int id)
+    {
+        var zwierze = await _context.Zwierzeta
+            .Include(z => z.Wizyty)
+            .FirstOrDefaultAsync(z => z.Id == id);
+
+        if (zwierze == null) return NotFound();
+
+        _context.Wizyty.RemoveRange(zwierze.Wizyty);
+        _context.Zwierzeta.Remove(zwierze);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
 }

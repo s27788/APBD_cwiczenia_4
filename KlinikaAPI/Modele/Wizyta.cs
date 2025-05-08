@@ -9,5 +9,5 @@ public class Wizyta
     // FK
     public int ZwierzeId { get; set; }
 
-    public Zwierze Zwierze { get; set; } = null!;
+    public Zwierze? Zwierze { get; set; }
 }
