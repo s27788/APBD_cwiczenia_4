@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KlinikaAPI", "KlinikaAPI\KlinikaAPI.csproj", "{B54B2CE6-5A64-4D59-ACED-C9A1135DB81A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B54B2CE6-5A64-4D59-ACED-C9A1135DB81A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B54B2CE6-5A64-4D59-ACED-C9A1135DB81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B54B2CE6-5A64-4D59-ACED-C9A1135DB81A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B54B2CE6-5A64-4D59-ACED-C9A1135DB81A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
